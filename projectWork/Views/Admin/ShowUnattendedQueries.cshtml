@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width initial-sacale=1" />
+    <title>All Users - Questionnaire</title>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald:400,300,700|Poiret+One' rel='stylesheet' type='text/css'>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/Main/Home")" style="font-family: 'Poiret One', cursive; font-size: 32px;">
+                    <div class="icon"></div>
+                    <div class="title" style="color:white">Questionnaire</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="@Url.Content("~/Admin/Dashboard")">Dashboard</a></li>
+                    <li><a href="">All Users</a></li>
+                    <li><a href="@Url.Content("~/Admin/Logout")">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row"><h3>Unattended Queries</h3></div>
+        <div class="row">
+            <div class="col-md-12 box-area">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>Full Name</td>
+                            <td>Email Address</td>
+                            <td>Query</td>
+                            <td>Attended</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblQueries"></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+
+            Copyright&copy; by <a>Questionnaire</a>. All rights reserved.
+
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+
+        $(document).ready(MainFunction);
+        function MainFunction() {
+
+            var settings = {
+                type: "GET",
+                dataType: "json",
+                async: true,
+                url: "/Admin/GetUnattendedQueries",
+                success: function (d) {
+                    if (d.success) {
+                        for (var i = 0; i < d.Result.length; i++) {
+                            var obj = d.Result[i];
+                            if (obj.isAttended == true)
+                                status = "YES";
+                            else if (obj.isAttended == false)
+                                status = "NO";
+
+                            var $tr = $("<tr id=" + obj.QueryID + "> <td>" + obj.FullName + "</td><td>" + obj.Email + "</td><td>" + obj.msg + "</td><td>" + "<a id='attendQuery' role='button'> " + status + " </a>" + "</td></tr>");
+
+                            $("#tblQueries").append($tr);
+                        }
+                    }
+                }
+            };
+
+            jQuery.ajax(settings);
+        }
+
+        $(document).ready(AttendFunction);
+        function AttendFunction() {
+            $('tbody').on('click', 'a', function () {
+                if ($(this).attr('id') == 'attendQuery') {
+                    var id = $(this).closest('tr').attr('id');
+                    var data = {};
+                    data.QueryID = id;
+
+                    var settings = {
+                        type: "POST",
+                        dataType: "json",
+                        async: true,
+                        data: data,
+                        url: "/Admin/AttendQuery",
+                        success: function (d) {
+                            if (d.success) {
+                                $("#tblQueries").html("");
+                                MainFunction();
+                            }
+                        }
+                    };
+                    jQuery.ajax(settings);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.9.1.js"></script>
+</body>
+</html>

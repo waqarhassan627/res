@@ -1,0 +1,174 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width initial-sacale=1" />
+    <title>All University Students - Questionnaire</title>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald:400,300,700|Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/bootstrap.min.css">
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/themes/flat-blue.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/Main/Home")" style="font-family: 'Poiret One', cursive; font-size: 32px;">
+                    <div class="icon"></div>
+                    <div class="title" style="color:white">Questionnaire</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="@Url.Content("~/Admin/Dashboard")">Dashboard</a></li>
+                    <li><a href="@Url.Content("~/Admin/ShowAll")">All Users</a></li>
+                    <li><a href="@Url.Content("~/Admin/Logout")">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row"><h3>University Students</h3></div>
+        <div class="row" style="min-height:457px">
+            <div class="col-md-12 box-area">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>UserID</td>
+                            <td>Username</td>
+                            <td>Fullname</td>
+                            <td>User Type</td>
+                            <td>Email</td>
+                            <td>Contact No</td>
+                            <td>Status</td>
+                            <td>Edit</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblUsers"></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="adminChangePassword" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="input-group">
+                            <input type="hidden" name="UserID" class="form-control" value="2" />
+                            <input type="password" name="NewPassword" class="form-control" placeholder="Enter your new password here">
+                            <span class="input-group-btn">
+                                <input class="btn btn-success" type="submit" value="Go!" />
+                            </span>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+
+            Copyright&copy; by <a>Questionnaire</a>. All rights reserved.
+
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+
+        $(document).ready(MainFunction);
+        function MainFunction() {
+
+            var settings = {
+                type: "GET",
+                dataType: "json",
+                async: true,
+                url: "/Admin/GetUniversityStudents",
+                success: function (d) {
+
+                    if (d.success) {
+                        for (var i = 0; i < d.Result.length; i++) {
+                            var obj = d.Result[i];
+                            var type;
+                            if (obj.UserType == 0) {
+                                type = "Administrator";
+                            } else if (obj.UserType == 1) {
+                                type = "University Student";
+                            } else if (obj.UserType == 2) {
+                                type = "Outsider Student";
+                            } else if (obj.UserType == 3) {
+                                type = "Teacher";
+                            }
+                            if (obj.isActive == true) {
+                                status = "Enabled";
+                                CssClass = "enabled";
+                            }
+                            else if (obj.isActive == false) {
+                                status = "Disabled";
+                                CssClass = "danger";
+                            }
+
+                            var $tr = $("<tr id=" + obj.UserID + " class=" + CssClass + "><td>" + obj.UserID + "</td><td>" + obj.Username + "</td><td>" + obj.FullName + "</td><td>" + type + "</td><td>" + obj.Email + "</td><td>" + obj.ContactNo + "</td><td>" + "<a id='disableUser' role='button'> " + status + " </a>" + "</td><td>" + "<a href='@Url.Content("~/Admin/Edit")?id=" + obj.UserID + "'> ... </a>" + "</td></tr>");
+
+                            $("#tblUsers").append($tr);
+                        }
+                    }
+                }
+            };
+
+            jQuery.ajax(settings);
+        }
+
+        $(document).ready(DisableFunction);
+        function DisableFunction() {
+
+            $('tbody').on('click', 'a', function () {
+                if ($(this).attr('id') == 'disableUser') {
+                    var id = $(this).closest('tr').attr('id');
+                    var data = {};
+                    data.UserID = id;
+
+
+                    var settings = {
+                        type: "POST",
+                        dataType: "json",
+                        async: true,
+                        data: data,
+                        url: "/Admin/ToggleStatus",
+                        success: function (d) {
+                            if (d.success) {
+                                $("#tblUsers").html("");
+                                MainFunction();
+                            }
+                        }
+                    };
+                    jQuery.ajax(settings);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

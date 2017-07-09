@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Quiz - Questionnaire</title>
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald:400,300,700|Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/Quiz.css")">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/themes/flat-blue.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    
+    <section>
+        <div class="container" style="margin-top: 80px">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 box-area">
+                    <h1 class="text-center">@ViewBag.Coursename"</h1>
+                    <h4 class="text-center description">Each question carries one mark.</h4>
+                    <hr>
+                    <form method="post" action="@Url.Content("~/OutsiderStudent/SubmitTest")">
+                        <input type="hidden" value="@ViewBag.Coursename" name="cname" />
+
+                        @{
+                            int i = 1;
+                            foreach (var t in ViewBag.Test)
+                            {
+                                <div class="form-group">
+                                    <span id="qNo" class="QuestionNo">Question-@i: </span>
+                                    <span id="statement" class="QuestionSt">@t.Statement</span><br>
+                                    <input type="hidden" value="@t.Statement" name="@t.Statement" />
+                                    <input type="radio" class="radios" name="@t.StID" value="@t.OptA"> <span class="options">@t.OptA</span><br>
+                                    <input type="radio" class="radios" name="@t.StID" value="@t.OptB"> <span class="options">@t.OptB</span><br>
+                                    <input type="radio" class="radios" name="@t.StID" value="@t.OptC"> <span class="options">@t.OptC</span><br>
+                                    <input type="radio" class="radios" name="@t.StID" value="@t.OptD"> <span class="options">@t.OptD</span><br>
+                                </div>
+                                i++;
+                            }
+                        }
+                        <input type="submit" class="form-control btn btn-primary" name="Submit" value="Submit">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+
+            Copyright&copy; by <a>Questionnaire</a>. All rights reserved.
+
+        </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script type="text/javascript">
+
+        $(document).ready(MainFunction);
+        function MainFunction() {
+
+            var settings = {
+                type: "GET",
+                dataType: "json",
+                async: true,
+                url: "/OutsiderStudent/GetCertificationTest",
+                success: function (d) {
+                    if (d.success) {
+                        for (var i = 0; i < d.Result.length; i++) {
+                            var obj = d.Result[i];
+                            var $ques = $("<div class='form-group'> " +
+                                    "<span id='qNo' class='QuestionNo'>Question-" + i + ": </span>" +
+                                    "<span id='statement' class='QuestionSt'>" + obj.Statement + "</span><br>" +
+                                    "<input type='radio' class='radios' name=" + obj.StID + " value=" + obj.OptA + "> <span class='options'>" + obj.OptA + "</span><br>" +
+                                    "<input type='radio' class='radios' name=" + obj.StID + " value=" + obj.OptB + "> <span class='options'>" + obj.OptB + "</span><br>" +
+                                    "<input type='radio' class='radios' name=" + obj.StID + " value=" + obj.OptC + "> <span class='options'>" + obj.OptC + "</span><br>" +
+                                    "<input type='radio' class='radios' name=" + obj.StID + " value=" + obj.OptD + "> <span class='options'>" + obj.OptD + "</span><br>" +
+                                    "</div>");
+                            $("#test").append($ques);
+                        }
+                    }
+                }
+            };
+
+            jQuery.ajax(settings);
+        }
+        </script>
+    -->
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

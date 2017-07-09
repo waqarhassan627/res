@@ -1,0 +1,331 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width initial-sacale=1" />
+    <title>Admin Dashboard - Questionnaire</title>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald:400,300,700|Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/bootstrap.min.css">
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/themes/flat-blue.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/Main/Home")" style="font-family: 'Poiret One', cursive; font-size: 32px;">
+                    <div class="icon"></div>
+                    <div class="title" style="color:white">Questionnaire</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="">Dashboard</a></li>
+                    <li><a href="@Url.Content("~/Admin/ShowAll")">All Users</a></li>
+                    <li><a href="@Url.Content("~/Admin/Logout")">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row"><h2 class="col-md-12 text-center">Administrator Dashboard</h2></div><hr />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <a href="@Url.Content("~/Admin/ShowAll")" class="col-md-2 box-area red"><span class="desc">Number of Users registered</span><span class="count">@ViewBag.UsersCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowUniversityStudents")" class="col-md-2 box-area violet"><span class="desc">Number of University Students registered</span><span class="count">@ViewBag.UniversityStudentsCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowOutsiderStudents")" class="col-md-2 box-area red"><span class="desc">Number of Outsider Students registered</span><span class="count">@ViewBag.OutsiderStudentsCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowTeachers")" class="col-md-2 box-area violet"><span class="desc">Number of Teachers registered</span><span class="count">@ViewBag.TeachersCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowDisabled")" class="col-md-2 box-area red"><span class="desc">Number of Disabled Users</span><span class="count">@ViewBag.DisabledCount</span></a>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addUser"><span class="desc">Add new User</span></a>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addUniStudent"><span class="desc">Add University Student</span></a>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addOutStudent"><span class="desc">Add Outsider Student</span></a>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addTeacher"><span class="desc">Add new Teacher</span></a>
+            <a href="#" class="col-md-2 box-area"><span class="desc">Disable Users</span></a>
+        </div> <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <a href="@Url.Content("~/Admin/ShowAllQueries")" class="col-md-2 box-area violet"><span class="desc">Number of Queries received</span><span class="count">@ViewBag.QueriesCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowUnattendedQueriesCount")" class="col-md-2 box-area red"><span class="desc">Number of Unattended Queries</span><span class="count">@ViewBag.UnattendedQueriesCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowOutsiderStudents")" class="col-md-2 box-area violet"><span class="desc">Number of Outsider Students registered</span><span class="count">@ViewBag.OutsiderStudentsCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowDisabled")" class="col-md-2 box-area red"><span class="desc">Number of Disabled Users</span><span class="count">@ViewBag.DisabledCount</span></a>
+            <a href="@Url.Content("~/Admin/ShowTeachers")" class="col-md-2 box-area violet"><span class="desc">Number of Teachers registered</span><span class="count">@ViewBag.TeachersCount</span></a>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <a href="https://www.gmail.com" target="_blank" class="col-md-2 box-area"><span class="desc">Open Gmail for Reply</span></a>
+            <a href="https://www.yahoo.com" target="_blank" class="col-md-2 box-area"><span class="desc">Open Yahoo! for Reply</span></a>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addOutStudent"><span class="desc">Add Outsider Student</span></a>
+            <a href="#" class="col-md-2 box-area" role="button" data-toggle="modal" data-target="#addTeacher"><span class="desc">Add new Teacher</span></a>
+            <a href="#" class="col-md-2 box-area"><span class="desc">Disable Users</span></a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="adminChangePassword" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="input-group">
+                            <input type="hidden" name="UserID" class="form-control" value="2" />
+                            <input type="password" name="NewPassword" class="form-control" placeholder="Enter your new password here">
+                            <span class="input-group-btn">
+                                <input class="btn btn-success" type="submit" value="Go!" />
+                            </span>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUser" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add User</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="auForm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="auUname" placeholder="Enter Username" /> <br />
+                            <input class="form-control" type="text" id="auFname" placeholder="Enter Fullname" /> <br />
+                            <input class="form-control" type="password" id="auPassword" placeholder="Enter password" /> <br />
+                            <input class="form-control" type="text" id="auUserType" placeholder="Enter usertype (0,1,2,3)" /> <br />
+                            <input class="form-control" type="text" id="auEmail" placeholder="Enter Email address" /> <br />
+                            <input class="form-control" type="text" id="auAddress" placeholder="Enter Address" /> <br />
+                            <input class="form-control" type="text" id="auContact" placeholder="Enter Contact no" /> <br />
+                            <input class="form-control btn btn-primary" type="button" id="auSave" value="Save" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" id="auFooter"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUniStudent" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add University Student</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="ausForm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="ausUname" placeholder="Enter Username" /> <br />
+                            <input class="form-control" type="text" id="ausFname" placeholder="Enter Fullname" /> <br />
+                            <input class="form-control" type="password" id="ausPassword" placeholder="Enter password" /> <br />
+                            <input class="form-control" type="text" id="ausEmail" placeholder="Enter Email address" /> <br />
+                            <input class="form-control" type="text" id="ausAddress" placeholder="Enter Address" /> <br />
+                            <input class="form-control" type="text" id="ausContact" placeholder="Enter Contact no" /> <br />
+                            <input class="form-control btn btn-primary" type="button" id="ausSave" value="Save" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" id="ausFooter"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addOutStudent" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Outsider Student</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="aosForm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="aosUname" placeholder="Enter Username" /> <br />
+                            <input class="form-control" type="text" id="aosFname" placeholder="Enter Fullname" /> <br />
+                            <input class="form-control" type="password" id="aosPassword" placeholder="Enter password" /> <br />
+                            <input class="form-control" type="text" id="aosEmail" placeholder="Enter Email address" /> <br />
+                            <input class="form-control" type="text" id="aosAddress" placeholder="Enter Address" /> <br />
+                            <input class="form-control" type="text" id="aosContact" placeholder="Enter Contact no" /> <br />
+                            <input class="form-control btn btn-primary" type="button" id="aosSave" value="Save" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" id="aosFooter"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addTeacher" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Teacher</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="atForm">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="atUname" placeholder="Enter Username" /> <br />
+                            <input class="form-control" type="text" id="atFname" placeholder="Enter Fullname" /> <br />
+                            <input class="form-control" type="password" id="atPassword" placeholder="Enter password" /> <br />
+                            <input class="form-control" type="text" id="atEmail" placeholder="Enter Email address" /> <br />
+                            <input class="form-control" type="text" id="atAddress" placeholder="Enter Address" /> <br />
+                            <input class="form-control" type="text" id="atContact" placeholder="Enter Contact no" /> <br />
+                            <input class="form-control btn btn-primary" type="button" id="atSave" value="Save" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer >
+        <div class="container">
+
+            Copyright&copy; by <a>Questionnaire</a>. All rights reserved.
+
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+
+        $(document).ready(MainFunction);
+        function MainFunction() {
+
+            $("#auSave").click(function (e) {
+
+                var data = {};
+                data.Username = $("#auUname").val();
+                data.FullName = $("#auFname").val();
+                data.Address = $("#auAddress").val();
+                data.UserType = $("#auUserType").val();
+                data.Password = $("#auPassword").val();
+                data.Email = $("#auEmail").val();
+                data.ContactNo = $("#auContact").val();
+
+                var settings = {
+                    type: "POST",
+                    data: data,
+                    async: true,
+                    url: "/Admin/SaveUser",
+                    success: function (d) {
+                        if (d.success) {
+                            $("#auFooter").html("<div class='alert alert-success' role='alert'><strong>User added!</strong> New user have been added.</div>");
+                            $("#auForm").trigger("reset");
+                        }
+                    }
+                };
+                jQuery.ajax(settings);
+                return false;
+            });
+
+            $("#ausSave").click(function (e) {
+
+                var data = {};
+                data.Username = $("#ausUname").val();
+                data.FullName = $("#ausFname").val();
+                data.Address = $("#ausAddress").val();
+                data.UserType = "1";
+                data.Password = $("#ausPassword").val();
+                data.Email = $("#ausEmail").val();
+                data.ContactNo = $("#ausContact").val();
+
+                var settings = {
+                    type: "POST",
+                    data: data,
+                    async: true,
+                    url: "/Admin/SaveUser",
+                    success: function (d) {
+                        if (d.success) {
+                            $("#ausFooter").html("<div class='alert alert-success' role='alert'><strong>User added!</strong> University Student have been added.</div>");
+                            $("#ausForm").trigger("reset");
+                        }
+                    }
+                };
+                jQuery.ajax(settings);
+                return false;
+            });
+
+            $("#aosSave").click(function (e) {
+
+                var data = {};
+                data.Username = $("#aosUname").val();
+                data.FullName = $("#aosFname").val();
+                data.Address = $("#aosAddress").val();
+                data.UserType = "2";
+                data.Password = $("#aosPassword").val();
+                data.Email = $("#aosEmail").val();
+                data.ContactNo = $("#aosContact").val();
+
+                var settings = {
+                    type: "POST",
+                    data: data,
+                    async: true,
+                    url: "/Admin/SaveUser",
+                    success: function (d) {
+                        if (d.success) {
+                            $("#aosFooter").html("<div class='alert alert-success' role='alert'><strong>User added!</strong> Outsider Student have been added.</div>");
+                            $("#aosForm").trigger("reset");
+                        }
+                    }
+                };
+                jQuery.ajax(settings);
+                return false;
+            });
+
+            $("#atSave").click(function (e) {
+
+                var data = {};
+                data.Username = $("#atUname").val();
+                data.FullName = $("#atFname").val();
+                data.Address = $("#atAddress").val();
+                data.UserType = "3";
+                data.Password = $("#atPassword").val();
+                data.Email = $("#atEmail").val();
+                data.ContactNo = $("#atContact").val();
+
+                var settings = {
+                    type: "POST",
+                    data: data,
+                    async: true,
+                    url: "/Admin/SaveUser",
+                    success: function (d) {
+                        if (d.success) {
+                            $("#atFooter").html("<div class='alert alert-success' role='alert'><strong>User added!</strong> Teacher have been added.</div>");
+                            $("#atForm").trigger("reset");
+                        }
+                    }
+                };
+                jQuery.ajax(settings);
+                return false;
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+    projectWork.Models.UserDTO dto = (projectWork.Models.UserDTO)Session["User"];
+}
+
+@model System.Collections.Generic.List<projectWork.Models.TestDTO>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Teacher Home - Questionnaire</title>
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald:400,300,700|Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/Quiz.css")">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/themes/flat-blue.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/Main/Home")" style="font-family: 'Poiret One', cursive; font-size: 32px;">
+                    <div class="icon"></div>
+                    <div class="title" style="color:white;">Questionnaire</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="@Url.Content("~/Teacher/CreateTest")">Create Test</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="@Url.Content("~/Teacher/Logout")">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <section>
+        <div class="container" style="margin-top:80px">
+            <div class="row" style="min-height:600px">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 box-area">
+                    <h2>Welcome @dto.Username</h2><input type="hidden" value="dto.UserID" name="userID" />
+                    <h1 class="text-center">Student Results</h1>
+                    <h4 class="text-center description">If you want to check result of Quiz than click on any of the link below.</h4>
+                    <hr>
+                    @{
+                        if(Model.Count() != 0 )
+                        { 
+                            foreach (projectWork.Models.TestDTO t in Model)
+                            {
+                                <form method="post" action="@Url.Content("~/Teacher/GetResult")">
+                                    <input type="hidden" name="testid" value="@t.TestID" />
+                                    <input type="hidden" name="t_Title" value="@t.Title" />
+                                    <button id="btnQuiz" type="submit" class="btn btn-lg btn-primary">@t.Title</button>
+                                    <br />
+                                    <br />
+                                </form>
+                            }
+                        }
+                        else
+                        {
+                            <h3 style="color:red"> You have no Results to Show</h3>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+
+            Copyright&copy; by <a>Questionnaire</a>. All rights reserved.
+
+        </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questionnaire - A Testing Structure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/lib/css/font-awesome.min.css">
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/MainPage/css/themes/flat-blue.css">
+</head>
+<body class="flat-blue landing-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top  navbar-affix" role="navigation" data-spy="affix" data-offset-top="60">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">
+                    <div class="icon"></div>
+                    <div class="title">Questionnaire</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="@Url.Content("~/Users/SignUp")">Signup</a></li>
+                    <li><a href="#Pricing">Pricing</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="jumbotron app-header">
+        <div class="container">
+            <h2 class="text-center">
+                <i class="app-logo fa fa-question fa-5x color-white"></i>
+                <p class="text-center color-white app-description">Questionnaire is a smart testing structure that works based on  real life scneario.<br>Questionnaire also supports short courses with reasonable fee structure.</p>
+                <p class="text-center"><a class="btn btn-primary btn-lg app-btn" href="@Url.Content("~/Users/Login")" role="button">Login »</a></p>
+        </h2>
+        </div>
+    </div>
+    <div class="container-fluid app-content-a">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 col-sm-6">
+                    <span class="fa-stack fa-lg fa-5x">
+                        <i class="fa fa-circle-thin fa-stack-2x"></i>
+                        <i class="fa fa-male fa-stack-1x"></i>
+                    </span>
+                    <h2>Outsider Student</h2>
+                    <p>This type of user can only engage in short courses and not in university routine tests. User would have to signup for the account himself/herself. Navigate to signup from Navbar.</p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-md-4 col-sm-6">
+                    <span class="fa-stack fa-lg fa-5x">
+                        <i class="fa fa-circle-thin fa-stack-2x"></i>
+                        <i class="fa fa-users fa-stack-1x"></i>
+                    </span>
+                    <h2>University Students</h2>
+                    <p>Accounts are managed by the admin. University can engage in both university routine tests and also short courses. No discounted prices for university students.</p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-md-4 col-sm-6">
+                    <span class="fa-stack fa-lg fa-5x">
+                        <i class="fa fa-circle-thin fa-stack-2x"></i>
+                        <i class="fa fa-mortar-board fa-stack-1x"></i>
+                    </span>
+                    <h2>Teachers</h2>
+                    <p>Accounts are managed by the admin like university users. Teachers create tests/quizzes for class students and all the quiz data is managed within. Teachers can do short courses as well.</p>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+        </div>
+    </div>
+    <a name="Pricing"></a>
+    <div class="container-fluid app-content-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center app-content-header">Pricing</h2>
+                    <p class="text-center app-content-description">Currently we are dealing in SIX short courses.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row no-margin no-gap">
+                        <div class="col-md-2">
+                            <div class="pricing-table dark-blue">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 2000</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>MS-Office</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Dr. Jon Snow</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/ms-office.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pricing-table green">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 1500</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>Photoshop</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Mr. Andy</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/photoshop.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pricing-table dark-blue">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 2000</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>CCNA</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Mr. John Hasting</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/ccna.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pricing-table green">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 1000</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>PHP</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Mr. Umer Ali</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/php.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pricing-table dark-blue">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 2500</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>DBA</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Mr. Rohaan Ali</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/dba.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pricing-table green">
+                                <div class="pt-header">
+                                    <div class="plan-pricing">
+                                        <div class="pricing">Rs. 1000</div>
+                                        <div class="pricing-type">per test</div>
+                                    </div>
+                                </div>
+                                <div class="pt-body">
+                                    <h3>ASP .Net</h3>
+                                    <ul class="plan-detail">
+                                        <li>30 MCQs</li>
+                                        <li>Random and new each time</li>
+                                        <li>Prepared by: Mr. Umair Aslam</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-footer">
+                                    <a target="_blank" role="button" class="btn btn-primary" href=@Url.Content("~/Content/MainPage/SamplePaper/aspnet.pdf")>Sample Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a name="Contact"></a>
+    <div class="container-fluid app-content-b contact-us">
+        <div class="container">
+            <div class="row featurette">
+                <div class="col-md-6">
+                    <h2 class="color-white contact-us-header">Contact Us</h2>
+                    <p class="color-white contact-us-description">If you have any queries regarding any matter, you can contact us here. Enter your fullname and email address with your query. We will try to get back to you ASAP. Thanks.</p>
+                </div>
+                <div class="col-md-6">
+                    <form method="post" action="@Url.Content("~/Main/SubmitQuery")">
+                        <div class="row">
+                            <div class="col-sm-6"><input id="name" name="name" type="text" class="form-control" placeholder="Full Name"> </div>
+                            <div class="col-sm-6"><input id="email" name="email" type="email" class="form-control" placeholder="Email address"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12"><textarea id="message" name="message" class="form-control" placeholder="Your Message" rows="5"></textarea></div>
+                        </div>
+                        <div>
+                            <button id="btnSend" type="submit" class="btn btn-lg btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /END THE FEATURETTES -->
+    <!-- FOOTER -->
+    <footer class="app-footer">
+        <div class="container">
+            <p class="text-muted">&copy; 2015, Tui2Tone Templates Studio.</p>
+        </div>
+    </footer>
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/MainPage/lib/js/bootstrap.min.js"></script>
+    <!-- /.container -->
+</body>
+</html>
